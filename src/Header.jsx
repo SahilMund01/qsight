@@ -19,11 +19,7 @@ const Header = ({handleClose, handleMenu, anchorEl, userRole}) => {
             Qsight
           </Typography>
           <div>
-            {
-              userRole &&   <Typography variant="h6" sx={{ flexGrow: 1, marginRight: '20px'}}>
-              <span className='font-semibold'>({userRole})</span>
-           </Typography>
-            }
+          
         
           </div>
           <div>

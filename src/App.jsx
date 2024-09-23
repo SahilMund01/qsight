@@ -4,10 +4,8 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import { Descope, useDescope } from '@descope/react-sdk';
 import logo from './assets/QSight.png'
-import Hospital from './hospital';
 import Header from './Header';
-import { fetchAndProcessAdminData, fetchAndProcessUserData } from './api';
-import Admin from './Admin';
+import { fetchAndProcessUserData } from './api';
 import User from './User';
 
 const getInitialTheme = () => {
@@ -64,13 +62,12 @@ function App() {
 
 
   const fetchData = async () => {
-    const adminData = await fetchAndProcessAdminData();
-    // const adminData = await fetchAndProcessUserData();
-    console.log('admin',adminData)
+    const userData = await fetchAndProcessUserData();
+    console.log('admin',userData)
     setData((prev) => {
       return {
         ...prev,
-        admin: adminData
+        user: userData
       }
     });
   }
@@ -118,13 +115,13 @@ function App() {
            console.log(e?.detail);
            console.log(e?.detail?.user?.email);
            localStorage.setItem('user-data', JSON.stringify({
-            role: "admin",
+            role: "user",
             email : e?.detail?.user?.name
            }))
            setUser((prev) => {
             return {
               ...prev,
-              role: "admin",
+              role: "user",
               email : e?.detail?.user?.name
             }
            })
@@ -209,11 +206,6 @@ function App() {
     </IconButton>
     </header> */}
         <Header handleClose={handleClose} handleMenu={handleMenu} anchorEl={anchorEl} userRole={user.role}/>
-
-        {/* <Hospital/> */}
-        {
-          user?.role === "admin" && data?.admin && <Admin data={data?.admin} email={user.email}/> 
-        }
 
         {
           user?.role === 'user' &&  data?.user && <User data={data?.user} email={user.email}/>

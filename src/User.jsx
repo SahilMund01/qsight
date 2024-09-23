@@ -1,7 +1,5 @@
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Alert, AlertTitle, Chip, Typography, Button } from '@mui/material'
+import { Typography } from '@mui/material'
 import React, { useState } from 'react'
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-import EditIcon from '@mui/icons-material/Edit';
 
 const User = ({ data: hospital, email }) => {
 
@@ -17,8 +15,6 @@ const User = ({ data: hospital, email }) => {
           Please find the below details.
         </Typography>
       </div>
-
-
 
 
 
