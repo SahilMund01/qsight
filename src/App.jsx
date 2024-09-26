@@ -109,9 +109,9 @@ function App() {
             email : e?.detail?.user?.name,
             tenantId : e?.detail.user?.userTenants[0].tenantId
            }))
-           console.log('tenat id..', e?.detail.user?.userTenants[0])
-           console.log('tenat id..', e?.detail.user?.userTenants[0].roleNames)
-           console.log('tenat id..', e?.detail.user?.userTenants[0].roleNames.lentgh)
+          //  console.log('tenat id..', e?.detail.user?.userTenants[0])
+          //  console.log('tenat id..', e?.detail.user?.userTenants[0].roleNames)
+          //  console.log('tenat id..', e?.detail.user?.userTenants[0].roleNames.lentgh)
            setTenatId(e?.detail.user?.userTenants[0].tenantId);
            setUser((prev) => {
             return {

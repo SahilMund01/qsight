@@ -22,7 +22,24 @@ const User = ({ tenantId,  email }) => {
 
   },[tenantId])
 
-  if (!hospital) return;
+  if (!hospital) return
+  <div className='w-[90%] m-auto mt-6'>
+  <div className="bg-blue-100 border border-blue-300 rounded-md p-4 my-4">
+    <Typography className="text-lg font-bold text-blue-700">
+      Welcome <strong>{email}</strong>, you have successfully logged into your account!
+    </Typography>
+    <Typography className="text-md text-blue-600 mt-2">
+      There is no hospital present under your name.
+    </Typography>
+  </div>
+
+
+
+
+
+ 
+</div>
+  ;
   return (
     <div className='w-[90%] m-auto mt-6'>
       <div className="bg-blue-100 border border-blue-300 rounded-md p-4 my-4">
