@@ -169,7 +169,7 @@ const Admin = ({  email }) => {
 
 
 
-        <Button sx={{ background: '' }} variant="contained" onClick={() => handleOpen(null, true)}>Add New</Button>
+        {/* <Button sx={{ background: '' }} variant="contained" onClick={() => handleOpen(null, true)}>Add New</Button> */}
 
       </div>
 
