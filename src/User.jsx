@@ -1,8 +1,26 @@
 import { Typography } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { fetchAndProcessUserData } from './api';
 
-const User = ({ data: hospital, email }) => {
+const User = ({ tenantId,  email }) => {
 
+  const [hospital, setData] = useState();
+
+ 
+
+  const fetchData = async () => {
+    const userData = await fetchAndProcessUserData(tenantId);
+    console.log('user',userData)
+    setData(userData);
+  }
+ 
+
+  useEffect(() => {
+
+    
+    fetchData();
+
+  },[tenantId])
 
   if (!hospital) return;
   return (

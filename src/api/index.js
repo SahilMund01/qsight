@@ -13,20 +13,22 @@ const tenatData = {
     adminId: "admin-456",
   };
 
-const fetchAdminData = () => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve({ data: adminData });
-    }, 1000); 
-  });
-};
-const fetchUserData = () => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve({ data: tenatData });
-    }, 1000); 
-  });
-};
+
+  const fetchAdminData = async () => {
+    // return new Promise((resolve) => {
+    //   setTimeout(() => {
+    //     resolve({ data: adminData });
+    //   }, 1000); 
+    // });
+  
+    try {
+      const data = await axios.get("https://dns-ssl.online/api/tenant/all");
+    console.log(data);
+    return data;
+    } catch (error) {
+      console.error('ERROR', error)
+    }
+  };
 
 // Function to generate serial numbers for Screen 2 data
 const addSerialNumbers = (data) => {
@@ -58,5 +60,15 @@ export const fetchAndProcessUserData = async (tenantId) => {
     console.error('Error fetching tenant info:', error);
     throw error;
   }
+  };
+
+  export const fetchAndProcessAdminData = async () => {
+    try {
+      const response = await fetchAdminData();
+      const dataWithSerialNumbers = addSerialNumbers(response.data);
+      return dataWithSerialNumbers;
+    } catch (error) {
+      console.error("Error fetching and processing Screen 2 data:", error);
+    }
   };
 

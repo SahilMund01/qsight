@@ -7,6 +7,7 @@ import logo from './assets/QSight.png'
 import Header from './Header';
 import { fetchAndProcessUserData } from './api';
 import User from './User';
+import Admin from './Admin';
 
 const getInitialTheme = () => {
   if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -22,10 +23,7 @@ function App() {
   const sessionToken = descopeSdk.getSessionToken();
   const [loginResp, setLoginResp] = useState([]);
   const [tenatId, setTenatId] = useState("");
-  const [data, setData] = useState({
-    user: null,
-    admin: null
-  });
+  
   const [user, setUser] = useState({
     email: "",
     role : ""
@@ -61,21 +59,6 @@ function App() {
   }, [])
 
 
-  const fetchData = async () => {
-    const userData = await fetchAndProcessUserData(tenatId);
-    console.log('user',userData)
-    setData((prev) => {
-      return {
-        ...prev,
-        user: userData
-      }
-    });
-  }
-
-  useEffect(() => {
-    fetchData();
-
-  },[tenatId])
 
 
   const onLogout = async () => {
@@ -99,8 +82,10 @@ function App() {
 
   const handleClose = (val) => {
     if(val==='logout'){
-      onLogout()
+      onLogout();
+      localStorage.clear();
     }
+    
     setAnchorEl(null);
   };
 
@@ -120,16 +105,18 @@ function App() {
            console.log(e?.detail);
            console.log(e?.detail?.user?.email);
            localStorage.setItem('user-tenat-data', JSON.stringify({
-            role: "user",
+            role: e?.detail.user?.userTenants[0].roleNames.lentgh == 0 ? 'user' : "admin",
             email : e?.detail?.user?.name,
             tenantId : e?.detail.user?.userTenants[0].tenantId
            }))
-           console.log('tenat id..', e?.detail.user?.userTenants[0].tenantId)
+           console.log('tenat id..', e?.detail.user?.userTenants[0])
+           console.log('tenat id..', e?.detail.user?.userTenants[0].roleNames)
+           console.log('tenat id..', e?.detail.user?.userTenants[0].roleNames.lentgh)
            setTenatId(e?.detail.user?.userTenants[0].tenantId);
            setUser((prev) => {
             return {
-              ...prev,
-              role: "user",
+              
+              role: e?.detail.user?.userTenants[0].roleNames.length==0 ? 'user' : "admin",
               email : e?.detail?.user?.name
             }
            })
@@ -216,7 +203,11 @@ function App() {
         <Header handleClose={handleClose} handleMenu={handleMenu} anchorEl={anchorEl} userRole={user.role}/>
 
         {
-          user?.role === 'user' &&  data?.user && <User data={data?.user} email={user.email}/>
+          user?.role === 'user' &&  <User tenantId={tenatId} email={user.email}/>
+        }
+
+{
+          user?.role === 'admin' &&  <Admin email={user.email}/>
         }
        
         </>
