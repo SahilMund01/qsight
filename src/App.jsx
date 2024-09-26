@@ -21,6 +21,7 @@ function App() {
   const descopeSdk = useDescope();
   const sessionToken = descopeSdk.getSessionToken();
   const [loginResp, setLoginResp] = useState([]);
+  const [tenatId, setTenatId] = useState("");
   const [data, setData] = useState({
     user: null,
     admin: null
@@ -47,7 +48,7 @@ function App() {
 
   useEffect(() => {
 
-    const userData = JSON.parse(localStorage.getItem('user-data'));
+    const userData = JSON.parse(localStorage.getItem('user-tenat-data'));
     setUser((prev) => {
       return {
         ...prev,
@@ -55,15 +56,14 @@ function App() {
         email : userData?.email
       }
      })
-    fetchData();
 
 
   }, [])
 
 
   const fetchData = async () => {
-    const userData = await fetchAndProcessUserData();
-    console.log('admin',userData)
+    const userData = await fetchAndProcessUserData(tenatId);
+    console.log('user',userData)
     setData((prev) => {
       return {
         ...prev,
@@ -71,6 +71,11 @@ function App() {
       }
     });
   }
+
+  useEffect(() => {
+    fetchData();
+
+  },[tenatId])
 
 
   const onLogout = async () => {
@@ -114,10 +119,13 @@ function App() {
            setLoginResp(e?.detail.user?.userTenants);
            console.log(e?.detail);
            console.log(e?.detail?.user?.email);
-           localStorage.setItem('user-data', JSON.stringify({
+           localStorage.setItem('user-tenat-data', JSON.stringify({
             role: "user",
-            email : e?.detail?.user?.name
+            email : e?.detail?.user?.name,
+            tenantId : e?.detail.user?.userTenants[0].tenantId
            }))
+           console.log('tenat id..', e?.detail.user?.userTenants[0].tenantId)
+           setTenatId(e?.detail.user?.userTenants[0].tenantId);
            setUser((prev) => {
             return {
               ...prev,

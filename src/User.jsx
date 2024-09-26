@@ -20,7 +20,7 @@ const User = ({ data: hospital, email }) => {
 
       <div className="border border-gray-200 rounded-lg p-6 text-center shadow-lg bg-white grid grid-cols-2 gap-6 justify-between items-center mb-8">
         <h3 className="text-xl font-semibold text-gray-800">{hospital?.hospitalName}</h3>
-        <div className="flex justify-between gap-6 items-center">
+        <div className="flex justify-between gap-6 items-start flex-col">
           <div className="min-w-[200px] text-left">
             <strong className="font-medium text-gray-700">Admin Name:</strong>
             <span className="text-gray-600 ml-2">{hospital?.adminName}</span>
@@ -30,8 +30,8 @@ const User = ({ data: hospital, email }) => {
             <span className="text-gray-600 ml-2">{hospital?.tenantId}</span>
           </div>
           <div className="min-w-[200px] text-left">
-            <strong className="font-medium text-gray-700">Admin ID:</strong>
-            <span className="text-gray-600 ml-2">{hospital?.adminId}</span>
+            <strong className="font-medium text-gray-700">Admin Email ID:</strong>
+            <span className="text-gray-600 ml-2">{hospital?.adminEmailId}</span>
           </div>
         </div>
       </div>

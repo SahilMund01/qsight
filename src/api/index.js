@@ -37,22 +37,26 @@ const addSerialNumbers = (data) => {
 };
 
 // Fetch and process Screen 2 data
-export const fetchAndProcessAdminData = async () => {
-  try {
-    const response = await fetchAdminData();
-    const dataWithSerialNumbers = addSerialNumbers(response.data);
-    return dataWithSerialNumbers;
-  } catch (error) {
-    console.error("Error fetching and processing Screen 2 data:", error);
-  }
-};
+// export const fetchAndProcessAdminData = async () => {
+//   try {
+//     const response = await fetchAdminData();
+//     const dataWithSerialNumbers = addSerialNumbers(response.data);
+//     return dataWithSerialNumbers;
+//   } catch (error) {
+//     console.error("Error fetching and processing Screen 2 data:", error);
+//   }
+// };
 
-export const fetchAndProcessUserData = async () => {
-    try {
-      const response = await fetchUserData();
-      return response.data;
-    } catch (error) {
-      console.error("Error fetching and processing Screen 2 data:", error);
-    }
+export const fetchAndProcessUserData = async (tenantId) => {
+  try {
+    const response = await axios.get(`https://dns-ssl.online/api/tenant/info`, {
+      params: { tenantId }
+    });
+    console.log('Tenant Info:', response.data);
+    return response.data[0];
+  } catch (error) {
+    console.error('Error fetching tenant info:', error);
+    throw error;
+  }
   };
 
