@@ -22,7 +22,7 @@ const tenatData = {
     // });
   
     try {
-      const data = await axios.get("https://dns-ssl.online/api/tenant/all");
+      const data = await axios.get("https://proj-qsight.techo.camp/api/tenant/all");
     console.log(data);
     return data;
     } catch (error) {
@@ -51,7 +51,7 @@ const addSerialNumbers = (data) => {
 
 export const fetchAndProcessUserData = async (tenantId) => {
   try {
-    const response = await axios.get(`https://dns-ssl.online/api/tenant/info`, {
+    const response = await axios.get(`https://proj-qsight.techo.camp/api/tenant/info`, {
       params: { tenantId }
     });
     console.log('Tenant Info:', response.data);

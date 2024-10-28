@@ -1,7 +1,6 @@
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Chip, Typography, Button, Dialog, DialogTitle, TextField, DialogActions, IconButton, DialogContent, CircularProgress, Snackbar, Alert } from '@mui/material'
 import { useEffect, useState } from 'react'
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-import EditIcon from '@mui/icons-material/Edit';
 import CloseIcon from '@mui/icons-material/Close';
 import { fetchAndProcessAdminData } from './api';
 
@@ -46,9 +45,9 @@ const Admin = ({  email }) => {
     setIsNew(false);
   };
 
-  const handleEdit = () => {
-    setEditMode(true);
-  };
+  // const handleEdit = () => {
+  //   setEditMode(true);
+  // };
 
   const createHospitals = async (selectedHospital) => {
     setLoading(true);
@@ -67,7 +66,7 @@ const Admin = ({  email }) => {
       }
 
       const data = await response.json();
-      setSnackbarMessage('Hospital onboarded successfully!');
+      setSnackbarMessage('Hospital onboarded successfully!', data);
       setSnackbarSeverity('success');
       setSnackbarOpen(true);
       

@@ -31,7 +31,7 @@ function App() {
 
 
   useEffect(() => {
-    console.log('resss', loginResp);
+    console.log('login-response', loginResp);
 
     if (sessionToken) {
       if (descopeSdk?.isJwtExpired(sessionToken)) {
@@ -120,7 +120,7 @@ function App() {
               email : e?.detail?.user?.name
             }
            })
-           fetchData();
+          //  fetchData();
          }}
          onError={(err) => {
            console.log('Error!', err);
